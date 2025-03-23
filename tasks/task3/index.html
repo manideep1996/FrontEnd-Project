@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickCalc - Smart Calculator</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #f4f4f4, #dde3eb);
+        }
+
+        .calculator {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            width: 380px;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #222;
+        }
+
+        .input-section {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        input {
+            padding: 12px;
+            border: 1.8px solid #bbb;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+            transition: border 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #0073e6;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .btn {
+            padding: 12px;
+            border: none;
+            background: #0073e6;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #005bb5;
+        }
+
+        .result-display {
+            padding: 12px;
+            border-radius: 6px;
+            background: #f7f7f7;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #222;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator">
+        <h2 class="title">QuickCalc</h2>
+        <div class="input-section">
+            <input type="number" id="num1" placeholder="First number">
+            <input type="number" id="num2" placeholder="Second number">
+        </div>
+        <div class="button-grid">
+            <button class="btn" onclick="calculate('add')">Add (+)</button>
+            <button class="btn" onclick="calculate('subtract')">Subtract (-)</button>
+            <button class="btn" onclick="calculate('multiply')">Multiply (×)</button>
+            <button class="btn" onclick="calculate('divide')">Divide (÷)</button>
+        </div>
+        <div id="result" class="result-display">Result will be shown here</div>
+    </div>
+
+    <script>
+        function calculate(operation) {
+            const num1 = parseFloat(document.getElementById("num1").value);
+            const num2 = parseFloat(document.getElementById("num2").value);
+
+            if (isNaN(num1) || isNaN(num2)) {
+                document.getElementById("result").textContent = "Enter valid numbers!";
+                return;
+            }
+
+            let output;
+
+            switch (operation) {
+                case 'add':
+                    output = num1 + num2;
+                    break;
+                case 'subtract':
+                    output = num1 - num2;
+                    break;
+                case 'multiply':
+                    output = num1 * num2;
+                    break;
+                case 'divide':
+                    output = num2 !== 0 ? (num1 / num2).toFixed(2) : "Cannot divide by zero!";
+                    break;
+                default:
+                    output = "Unknown operation";
+            }
+
+            document.getElementById("result").textContent = `Result: ${output}`;
+        }
+    </script>
+
+</body>
+</html>

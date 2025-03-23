@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Star Pattern Creator</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+    <style>
+        :root {
+            --background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            --card-bg: rgba(255, 255, 255, 0.4);
+            --primary: #1565c0;
+            --text-dark: #1a237e;
+            --border: rgba(255, 255, 255, 0.3);
+            --radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: var(--background);
+            padding: 20px;
+        }
+
+        .pattern-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            width: 380px;
+        }
+
+        h2 {
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        input, select, button {
+            padding: 10px;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        input {
+            background: rgba(255, 255, 255, 0.6);
+            outline: none;
+        }
+
+        select {
+            background: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+        }
+
+        button {
+            background: var(--primary);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #0d47a1;
+        }
+
+        .output-box {
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: var(--radius);
+            font-weight: bold;
+            color: var(--text-dark);
+            text-align: left;
+            white-space: pre-wrap;
+            min-height: 120px;
+            max-height: 220px;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+    <div class="pattern-card">
+        <h2>Star Pattern Creator</h2>
+        <div class="input-container">
+            <input type="number" id="rows" placeholder="Enter Rows (1-20)" min="1" max="20">
+            <select id="patternType">
+                <option value="left">Left-Aligned</option>
+                <option value="right">Right-Aligned</option>
+                <option value="pyramid">Pyramid</option>
+                <option value="inverted">Inverted Pyramid</option>
+            </select>
+            <button onclick="generatePattern()">Generate</button>
+        </div>
+        <div id="output" class="output-box">Pattern will appear here</div>
+    </div>
+    <script>
+        function generatePattern() {
+            let rows = parseInt(document.getElementById("rows").value);
+            let type = document.getElementById("patternType").value;
+            let output = "";
+            
+            if (isNaN(rows) || rows < 1 || rows > 20) {
+                document.getElementById("output").innerHTML = "Enter a valid number (1-20)";
+                return;
+            }
+
+            switch (type) {
+                case "left":
+                    for (let i = 1; i <= rows; i++) {
+                        output += "* ".repeat(i) + "\n";
+                    }
+                    break;
+                case "right":
+                    for (let i = 1; i <= rows; i++) {
+                        output += " ".repeat(rows - i) + "* ".repeat(i) + "\n";
+                    }
+                    break;
+                case "pyramid":
+                    for (let i = 1; i <= rows; i++) {
+                        output += " ".repeat(rows - i) + "* ".repeat(i * 2 - 1) + "\n";
+                    }
+                    break;
+                case "inverted":
+                    for (let i = rows; i >= 1; i--) {
+                        output += "* ".repeat(i) + "\n";
+                    }
+                    break;
+            }
+
+            document.getElementById("output").innerHTML = output;
+        }
+    </script>
+</body>
+</html>

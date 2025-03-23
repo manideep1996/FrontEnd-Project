@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Checker</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700&display=swap">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #cbe6ff, #a0c4ff);
+            --container-bg: #fff;
+            --primary-color: #0074e4;
+            --text-main: #222;
+            --text-muted: #666;
+            --border-color: #bbb;
+            --input-bg: #f8f8f8;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+            --transition: all 0.3s ease-in-out;
+            --grade-excellent: #16a085;
+            --grade-good: #2980b9;
+            --grade-average: #e67e22;
+            --grade-fail: #c0392b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: var(--bg-gradient);
+            padding: 30px;
+        }
+
+        .grade-container {
+            display: flex;
+            max-width: 800px;
+            width: 100%;
+            background: var(--container-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .grade-display {
+            background: var(--primary-color);
+            color: white;
+            padding: 40px;
+            width: 40%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .grade-circle {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: var(--text-muted);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: white;
+            margin: 0 auto 12px;
+            transition: var(--transition);
+        }
+
+        .grade-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .input-section {
+            width: 60%;
+            padding: 35px;
+        }
+
+        .heading {
+            font-size: 1.7rem;
+            font-weight: bold;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        .subheading {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 18px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        input {
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            background: var(--input-bg);
+            text-align: center;
+            transition: var(--transition);
+            outline: none;
+        }
+
+        input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .check-btn {
+            padding: 14px;
+            background: var(--primary-color);
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            margin-top: 12px;
+        }
+
+        .check-btn:hover {
+            background: #005bb5;
+        }
+
+        .grade-A { background: var(--grade-excellent); }
+        .grade-B { background: var(--grade-good); }
+        .grade-C { background: var(--grade-average); }
+        .grade-F { background: var(--grade-fail); }
+
+        @media (max-width: 768px) {
+            .grade-container {
+                flex-direction: column;
+            }
+
+            .grade-display {
+                width: 100%;
+                padding: 30px;
+            }
+
+            .input-section {
+                width: 100%;
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grade-container">
+        <div class="grade-display">
+            <div id="gradeCircle" class="grade-circle">?</div>
+            <p id="gradeText" class="grade-text">Your Grade</p>
+        </div>
+
+        <div class="input-section">
+            <h2 class="heading">Grade Checker</h2>
+            <p class="subheading">Enter your score to find out your grade</p>
+
+            <div class="input-group">
+                <label for="scoreInput">Enter Score (0-100):</label>
+                <input type="number" id="scoreInput" min="0" max="100" placeholder="Your score">
+            </div>
+
+            <button class="check-btn" onclick="checkGrade()">Check Grade</button>
+        </div>
+    </div>
+
+    <script>
+        function checkGrade() {
+            let score = parseFloat(document.getElementById("scoreInput").value);
+            let grade = "?";
+            let gradeClass = "";
+            let message = "Enter a valid score";
+
+            if (!isNaN(score) && score >= 0 && score <= 100) {
+                if (score >= 85) {
+                    grade = "A";
+                    gradeClass = "grade-A";
+                    message = "Outstanding!";
+                } else if (score >= 65) {
+                    grade = "B";
+                    gradeClass = "grade-B";
+                    message = "Well Done!";
+                } else if (score >= 45) {
+                    grade = "C";
+                    gradeClass = "grade-C";
+                    message = "Needs More Practice!";
+                } else {
+                    grade = "F";
+                    gradeClass = "grade-F";
+                    message = "Better Luck Next Time!";
+                }
+            }
+
+            document.getElementById("gradeCircle").textContent = grade;
+            document.getElementById("gradeCircle").className = `grade-circle ${gradeClass}`;
+            document.getElementById("gradeText").textContent = message;
+        }
+
+        window.onload = function() {
+            document.getElementById('scoreInput').focus();
+        };
+    </script>
+
+</body>
+</html>
