@@ -1,0 +1,99 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  
+  body {
+    background-color: #f2f2f2;
+    color: #333;
+    min-height: 100vh;
+  }
+  
+  /* Container */
+  .container {
+    width: 90%;
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  /* Title */
+  .page-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Subtitle */
+  .subtitle {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Content Box */
+  .content-box {
+    background-color: #fafafa;
+    padding: 15px;
+    border-left: 4px solid #4caf50;
+    margin-bottom: 20px;
+    border-radius: 5px;
+  }
+  
+  .content-box p {
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+  /* Button */
+  .action-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .action-btn:hover {
+    background-color: #45a049;
+  }
+  
+  /* Dashboard Box */
+  .dashboard-box {
+    background-color: #eee;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    height: 200px;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .container {
+      width: 95%;
+    }
+  
+    .page-title {
+      font-size: 20px;
+    }
+  
+    .action-btn {
+      width: 100%;
+    }
+  }
+  

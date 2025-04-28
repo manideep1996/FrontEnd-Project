@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Stack Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        h2, h3 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin-right: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .stack {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            min-height: 150px;
+        }
+
+        .task {
+            padding: 8px;
+            background-color: #e0e0e0;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .empty {
+            text-align: center;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Task Stack Manager</h2>
+
+    <label for="task">Enter Task:</label>
+    <input type="text" id="task" placeholder="Type a task...">
+
+    <button onclick="addTask()">Add</button>
+    <button onclick="undoTask()">Undo</button>
+
+    <h3>Task Stack (LIFO)</h3>
+    <div id="stackDisplay" class="stack">
+        <div class="empty">No tasks added</div>
+    </div>
+</div>
+
+<script>
+    var stack = [];
+
+    function addTask() {
+        var input = document.getElementById("task");
+        var task = input.value.trim();
+
+        if (task === "") {
+            alert("Please enter a task.");
+            return;
+        }
+
+        stack.push(task);
+        input.value = "";
+        input.focus();
+        updateStack();
+    }
+
+    function undoTask() {
+        if (stack.length === 0) {
+            alert("No tasks to undo.");
+            return;
+        }
+
+        stack.pop();
+        updateStack();
+    }
+
+    function updateStack() {
+        var display = document.getElementById("stackDisplay");
+
+        if (stack.length === 0) {
+            display.innerHTML = '<div class="empty">No tasks added</div>';
+        } else {
+            display.innerHTML = "";
+            for (var i = stack.length - 1; i >= 0; i--) {
+                var div = document.createElement("div");
+                div.className = "task";
+                div.textContent = stack[i];
+                display.appendChild(div);
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
