@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grade Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 40px;
+        }
+
+        .container {
+            background-color: white;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #2196f3;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1976d2;
+        }
+
+        .result {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .grade-box {
+            font-size: 36px;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Grade Checker</h2>
+    <label for="score">Enter your score (0–100):</label>
+    <input type="number" id="score" min="0" max="100" placeholder="e.g., 75">
+    <button onclick="checkGrade()">Check Grade</button>
+
+    <div class="result" id="message">Your result will appear here</div>
+    <div class="grade-box" id="grade">?</div>
+</div>
+
+<script>
+    function checkGrade() {
+        var score = parseFloat(document.getElementById("score").value);
+        var message = "";
+        var grade = "?";
+
+        if (!isNaN(score) && score >= 0 && score <= 100) {
+            if (score >= 85) {
+                grade = "A";
+                message = "Outstanding!";
+            } else if (score >= 65) {
+                grade = "B";
+                message = "Well Done!";
+            } else if (score >= 45) {
+                grade = "C";
+                message = "Needs More Practice!";
+            } else {
+                grade = "F";
+                message = "Better Luck Next Time!";
+            }
+        } else {
+            message = "Please enter a valid score between 0 and 100.";
+        }
+
+        document.getElementById("message").textContent = message;
+        document.getElementById("grade").textContent = grade;
+    }
+</script>
+
+</body>
+</html>
